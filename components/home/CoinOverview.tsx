@@ -4,18 +4,23 @@ import { fetcher } from '@/lib/coingecko.action';
 import { formatCurrency } from '@/lib/utils';
 
 const CoinOverview = async () => {
-    const coin = await fetcher<CoinDetailsData>(
-        'coins/bitcoin',
-        {
-            localization: false,
-            tickers: false,
-            market_data: true,
-            community_data: false,
-            developer_data: false,
-            sparkline: false,
-            // dex_pair_format: 'symbol'
-        }
-    );
+    let coin;
+    try {
+        coin = await fetcher<CoinDetailsData>(
+            'coins/bitcoin',
+            {
+                localization: false,
+                tickers: false,
+                market_data: true,
+                community_data: false,
+                developer_data: false,
+                sparkline: false,
+                // dex_pair_format: 'symbol'
+            }
+        );
+    } catch (error) {
+        console.error('Error fetching trending coins', error)
+    }
 
     if (!coin?.image?.large) return null;
 

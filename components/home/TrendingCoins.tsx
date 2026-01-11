@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/error-boundaries */
 import { fetcher } from '@/lib/coingecko.action';
 import { cn } from '@/lib/utils';
 import { TrendingDown, TrendingUp } from 'lucide-react';
@@ -50,26 +51,34 @@ const TrendingCoins = async () => {
         }
 
     ]
+    let trendingCoins;
 
-    const trendingCoins = await fetcher<{ coins: TrendingCoin[] }>
-        ('/search/trending', undefined, 300);
+        try {
 
-    return (
-        <div id='trending-coins'>
-            <h4>Trending Coins</h4>
-            <div className="trending-coins">
+            trendingCoins = await fetcher<{ coins: TrendingCoin[] }>
+                ('/search/trending', undefined, 300);
+} catch (error) {
+    console.error('Error fetching coin overview', error)
+}
+return (
+    <div id='trending-coins'>
+        <h4>Trending Coins</h4>
+        <div className="trending-coins">
 
-                <DataTable
-                    columns={columns}
-                    data={trendingCoins.coins.slice(0, 6) || []}
-                    rowKey={(row) => row.item.id}
-                    tableClassName='trending-coins-table'
-                    headerCellClassName='py-3!'
-                    bodyCellClassName='py-2!'
-                />
-            </div>
+
+            <DataTable
+                columns={columns}
+                data={trendingCoins.coins.slice(0, 6) || []}
+                rowKey={(row) => row.item.id}
+                tableClassName='trending-coins-table'
+                headerCellClassName='py-3!'
+                bodyCellClassName='py-2!'
+            />
         </div>
-    )
+    </div>
+)
+    
 }
 
 export default TrendingCoins
+
