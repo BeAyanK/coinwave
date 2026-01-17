@@ -7,7 +7,7 @@ import { TrendingDown, TrendingUp } from 'lucide-react';
 import { fetcher } from '@/lib/coingecko.action';
 import CoinOverview from '@/components/home/CoinOverview';
 import TrendingCoins from '@/components/home/TrendingCoins';
-import { CoinOverviewFallback, TrendingCoinsFallback } from '../components/home/fallback';
+import { CoinOverviewFallback, TrendingCoinsFallback } from '../components/fallback';
 
 
 

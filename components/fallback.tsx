@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from 'react';
 import DataTable from '@/components/DataTable';
-import { cn } from '@/lib/utils';
+
 
 export const CoinOverviewFallback = () => {
     return (
