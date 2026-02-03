@@ -1,21 +1,10 @@
-import React, { Suspense } from 'react'
-import Image from 'next/image';
-import DataTable from '@/components/DataTable';
-import Link from 'next/link';
-import { cn, formatCurrency } from '@/lib/utils';
-import { TrendingDown, TrendingUp } from 'lucide-react';
-import { fetcher } from '@/lib/coingecko.action';
+import { Suspense } from 'react';
 import CoinOverview from '@/components/home/CoinOverview';
 import TrendingCoins from '@/components/home/TrendingCoins';
-import { CoinOverviewFallback, TrendingCoinsFallback } from '../components/fallback';
-
-
-
-
-
+import { CategoriesFallback, CoinOverviewFallback, TrendingCoinsFallback } from '../components/fallback';
+import Categories from '@/components/home/Categories';
 
 const page = async () => {
-
 
   return (
     <main className="main-container">
@@ -31,7 +20,9 @@ const page = async () => {
       </section>
 
       <section className="w-full mt-7 space-y-4">
-        <p>Categories</p>
+        <Suspense fallback={<CategoriesFallback />}>          
+        <Categories />
+        </Suspense>
       </section>
 
     </main>
